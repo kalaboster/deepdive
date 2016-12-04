@@ -14,11 +14,12 @@ RUN apt-get update && apt-get install -qy \
         git \
         build-essential \
         postgresql-client \
+        vim \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 # Set up a non-superuser
-ARG USER=user
+ARG USER=wordsum
 ENV USER=$USER
 RUN adduser --disabled-password --gecos "" $USER \
  && adduser $USER adm \
@@ -41,3 +42,9 @@ RUN make depends \
 # Build deepdive
 RUN make bundled-runtime-dependencies
 RUN make
+
+# ENV
+ENV PATH /deepdive/dist/stage/bin/:$PATH
+
+# Install CoreNLP
+RUN /deepdive/dist/stage/bin/deepdive corenlp install
