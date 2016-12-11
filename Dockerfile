@@ -15,6 +15,12 @@ RUN apt-get update && apt-get install -qy \
         build-essential \
         postgresql-client \
         vim \
+        python-pip \
+        python-dev \
+        wget \
+        aptitude \
+        nmap \
+        build-essential \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -45,6 +51,8 @@ RUN make
 
 # ENV
 ENV PATH /deepdive/dist/stage/bin/:$PATH
+ENV PATH /usr/lib/postgresql/9.4/bin:$PATH
+ENV PYTHONPATH /usr/local/lib/python2.7/dist-packages
 
 # Install CoreNLP
 RUN /deepdive/dist/stage/bin/deepdive corenlp install
