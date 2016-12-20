@@ -11,6 +11,13 @@
 # a version of a pipeline.
 #######
 import yaml
+import uuid
+
+
+story = ""
+
+print uuid.uuid4()
+
 
 with open('story.yaml', 'r') as y:
     story = yaml.load(y)
@@ -32,9 +39,11 @@ if 'short' in story:
         for line in storylines:
 
             if not line.startswith("#"):
-                print line.strip()
+                print "A Line:" + line.strip()
+                story = story + "\n\n" + str(line.strip())
 
+print story
 
 with open("story.tsv", "w") as tsv:
     print("What the fuck to I print?")
-    print "\t".join(tsv)
+    print "\t" .join(story)
